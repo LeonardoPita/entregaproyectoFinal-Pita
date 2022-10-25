@@ -114,7 +114,7 @@ function addItemToCart(product, operation) {
 
 function removeItemFromCart(cartObj, index) {
     document.getElementById(`${cartObj.id}_cart_item`).remove();
-    myCart.splice(index, 1);                ////////////////////////////////////////////FIX BUG WEN DELETING THE FIRST ITEM/////////////////
+    myCart.splice(index, 1);                
 }
 
 /* --------------------------------FUNCTIONS FOR OPEN AND CLOSE THE CART----------------------- */
