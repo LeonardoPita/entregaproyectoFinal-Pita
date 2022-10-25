@@ -150,19 +150,19 @@ function calculateCart() {
         qty += myCart[key].quantity;
         subTotal += myCart[key].price * myCart[key].quantity;
         total = subTotal * tax;
-        total.toFixed(2);
     })
 };
 
 /* --------------------------------PAY BUTTON----------------------- */
-    payBtn.addEventListener("click", () => {
-        calculateCart();
-        if (total === 0) {
-            Swal.fire("No products in your cart")
-        } else {
+payBtn.addEventListener("click", () => {
+    calculateCart();
+    if (total === 0) {
+        Swal.fire("No products in your cart")
+    } else {
+        total = total.toFixed(2);
         Swal.fire({
             title: 'These are your purchase details:',
-            text: `You bought ${qty} items, whith a subtotal of ${subTotal} and a total of ${total}.`,
+            text: `You bought ${qty} items, whith a subtotal of ${subTotal} and a total of ${total}`,
             icon: 'success',
             showCancelButton: false,
             confirmButtonColor: '#3085d6',
@@ -189,12 +189,9 @@ function calculateCart() {
         myCart = [];
         myCartDom = [];
         setMyCartToSessionStorage();
-    
-        }
-    });
 
-
-
+    }
+});
 
 /* --------------------------------SESSION STORAGE----------------------- */
 
