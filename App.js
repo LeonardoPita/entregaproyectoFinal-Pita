@@ -106,6 +106,8 @@ function addItemToCart(product, operation) {
             document.getElementById(`${product.id}_cart_product`).innerText = cartObj.quantity;
             cartObj.quantity == 0 && removeItemFromCart(cartObj, index);
         }
+        setMyCartToSessionStorage();
+        return productAlreadyExists;
     })
     setMyCartToSessionStorage();
     return productAlreadyExists;
@@ -166,7 +168,7 @@ payBtn.addEventListener("click", () => {
             icon: 'success',
             showCancelButton: false,
             confirmButtonColor: '#3085d6',
-            confirmButtonText: 'Understood'
+            confirmButtonText: 'Finalize purchase'
         }).then((result) => {
             if (result.isConfirmed) {
                 Swal.fire(
