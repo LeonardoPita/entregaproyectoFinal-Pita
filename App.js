@@ -105,9 +105,9 @@ function addItemToCart(product, operation) {
             productAlreadyExists = true;
             document.getElementById(`${product.id}_cart_product`).innerText = cartObj.quantity;
             cartObj.quantity == 0 && removeItemFromCart(cartObj, index);
+            setMyCartToSessionStorage();
+            return productAlreadyExists;
         }
-        setMyCartToSessionStorage();
-        return productAlreadyExists;
     })
     setMyCartToSessionStorage();
     return productAlreadyExists;
@@ -116,7 +116,7 @@ function addItemToCart(product, operation) {
 
 function removeItemFromCart(cartObj, index) {
     document.getElementById(`${cartObj.id}_cart_item`).remove();
-    myCart.splice(index, 1);                
+    myCart.splice(index, 1);                ////////////////////////////////////////////FIX BUG WEN DELETING THE FIRST ITEM/////////////////
 }
 
 /* --------------------------------FUNCTIONS FOR OPEN AND CLOSE THE CART----------------------- */
@@ -132,6 +132,11 @@ const toggleCartOpenClose = () => {
 toggleCartOpenClose();
 /* -------------------------------- DELETE BUTTON IN THE CART----------------------- */
 clearCartBtn.addEventListener("click", function () {
+    Swal.fire("Your cart is clear!").then((result) => {
+        if (result.isConfirmed) {
+            location.reload();
+        }
+    });
     cartQuantity = 0;
     cartItems.innerText = 0;
     for (let i = 0; i < myCartDom.length; i++) {
@@ -152,30 +157,35 @@ function calculateCart() {
         qty += myCart[key].quantity;
         subTotal += myCart[key].price * myCart[key].quantity;
         total = subTotal * tax;
+        total.toFixed(2);
     })
 };
 
 /* --------------------------------PAY BUTTON----------------------- */
-payBtn.addEventListener("click", () => {
-    calculateCart();
-    if (total === 0) {
-        Swal.fire("No products in your cart")
-    } else {
-        total = total.toFixed(2);
+    payBtn.addEventListener("click", () => {
+        calculateCart();
+        if (total === 0) {
+            Swal.fire("No products in your cart")
+        } else {
         Swal.fire({
             title: 'These are your purchase details:',
-            text: `You bought ${qty} items, whith a subtotal of ${subTotal} and a total of ${total}`,
+            text: `You bought ${qty} items, whith a subtotal of ${subTotal} and a total of ${total}.`,
             icon: 'success',
             showCancelButton: false,
             confirmButtonColor: '#3085d6',
-            confirmButtonText: 'Finalize purchase'
+            confirmButtonText: 'Understood'
         }).then((result) => {
             if (result.isConfirmed) {
                 Swal.fire(
                     'Success!',
                     'Your purchase will arrive in a few days.',
                     'success'
-                )
+                ).then((result) => {
+                    if (result.isConfirmed) {
+                        location.reload();
+                    }
+                })
+                localStorage.clear();
             }
         })
         cartQuantity = 0;
@@ -191,9 +201,12 @@ payBtn.addEventListener("click", () => {
         myCart = [];
         myCartDom = [];
         setMyCartToSessionStorage();
+    
+        }
+    });
 
-    }
-});
+
+
 
 /* --------------------------------SESSION STORAGE----------------------- */
 
