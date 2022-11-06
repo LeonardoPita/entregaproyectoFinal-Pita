@@ -158,7 +158,7 @@ function calculateCart() {
         qty += myCart[key].quantity;
         subTotal += myCart[key].price * myCart[key].quantity;
         total = subTotal * tax;
-        total.toFixed(2);
+        total = total.toFixed(2);
     })
 };
 
