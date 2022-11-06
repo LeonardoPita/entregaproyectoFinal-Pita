@@ -134,6 +134,7 @@ toggleCartOpenClose();
 clearCartBtn.addEventListener("click", function () {
     Swal.fire("Your cart is clear!").then((result) => {
         if (result.isConfirmed) {
+            localStorage.clear();
             location.reload();
         }
     });
@@ -182,10 +183,10 @@ function calculateCart() {
                     'success'
                 ).then((result) => {
                     if (result.isConfirmed) {
+                        localStorage.clear();
                         location.reload();
                     }
                 })
-                localStorage.clear();
             }
         })
         cartQuantity = 0;
