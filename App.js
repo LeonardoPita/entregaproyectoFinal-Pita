@@ -22,7 +22,7 @@ let total = 0;
 getAndFillCartFromSessionStorage();
 /* ------------------------------PRODUCTS DISPLAY FROM DATA.JSON---------------------------------- */
 
-const products = fetch('./data.json')                      ////////////////////////////***************FETCH*****************///////////////////////////////////////
+const products = fetch('./data.json')
     .then((response) => response.json())
     .then((products) => {
         products.forEach(({ id, title, price, img, quantity }) => {
