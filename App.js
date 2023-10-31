@@ -39,11 +39,11 @@ const products = fetch('./data.json')                      /////////////////////
                                         <h3>${title}</h3>
                                         <h4>$${price}</h4>`
             productsDOM.append(productContent);
-            /* ----------CLICK PRODUCT TO ADD AND SUM IN THE BASQUET---------------------------- */
+            /* ----------CLICK PRODUCT TO ADD AND SUM IN THE CART---------------------------- */
 
             productContent.addEventListener("click", () => {
                 Toastify({
-                    text: "Item adeed to your cart",
+                    text: "Item added to your cart",
                     duration: 2000,
                     offset: {
                         x: 0,
@@ -116,7 +116,7 @@ function addItemToCart(product, operation) {
 
 function removeItemFromCart(cartObj, index) {
     document.getElementById(`${cartObj.id}_cart_item`).remove();
-    myCart.splice(index, 1);                ////////////////////////////////////////////FIX BUG WEN DELETING THE FIRST ITEM/////////////////
+    myCart.splice(index, 1);
 }
 
 /* --------------------------------FUNCTIONS FOR OPEN AND CLOSE THE CART----------------------- */
@@ -163,14 +163,14 @@ function calculateCart() {
 };
 
 /* --------------------------------PAY BUTTON----------------------- */
-    payBtn.addEventListener("click", () => {
-        calculateCart();
-        if (total === 0) {
-            Swal.fire("No products in your cart")
-        } else {
+payBtn.addEventListener("click", () => {
+    calculateCart();
+    if (total === 0) {
+        Swal.fire("No products in your cart")
+    } else {
         Swal.fire({
             title: 'These are your purchase details:',
-            text: `You bought ${qty} items, whith a subtotal of ${subTotal} and a total of ${total}.`,
+            text: `You bought ${qty} items, with a subtotal of ${subTotal} and a total of ${total}.`,
             icon: 'success',
             showCancelButton: false,
             confirmButtonColor: '#3085d6',
@@ -202,9 +202,8 @@ function calculateCart() {
         myCart = [];
         myCartDom = [];
         setMyCartToSessionStorage();
-    
-        }
-    });
+    }
+});
 
 
 
