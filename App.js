@@ -229,6 +229,3 @@ function getAndFillCartFromSessionStorage() {
         }
     }
 };
-
-
-
